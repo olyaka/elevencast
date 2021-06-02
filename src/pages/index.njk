@@ -14,6 +14,7 @@ pagination:
 <main>
   <h1>ElevenCast</h1>
   <p>A simple podcast starter kit based on <a href="https://11ty.dev/">Eleventy</a>.</p>
+  <p>You can subscribe to it <a href="/feed.xml">via RSS</a>.</p>
   {% for episode in pagination.items %}
     <article id="e{{ episode.data.number }}">
       <h2>

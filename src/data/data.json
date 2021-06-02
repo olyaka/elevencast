@@ -1,0 +1,18 @@
+{
+  "title": "ElevenCast",
+  "description": "A simple podcast starter kit based on Eleventy",
+  "domain": "https://elevencast.dev",
+  "authors": [
+    "Vadim Makeev"
+  ],
+  "type": "episodic",
+  "category": "Technology",
+  "subcategory": "Tech News",
+  "explicit": false,
+  "language": "en",
+  "owner": {
+    "name": "ElevenCast",
+    "email": "pepelsbey@gmail.com"
+  },
+  "copyright": "CC BY-NC-ND 4.0"
+}

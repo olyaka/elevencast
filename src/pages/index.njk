@@ -1,0 +1,42 @@
+---
+eleventyComputed:
+  title: "{% if pagination.pageNumber > 0 %}Page {{ pagination.pageNumber + 1 }}{% else %}{{ data.title }}{% endif %}"
+layout: page.njk
+permalink: "{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber + 1 }}/{% endif %}index.html"
+pagination:
+  data: collections.episode
+  size: 3
+  reverse: true
+---
+
+{% include 'header.njk' %}
+
+<main>
+  <h1>ElevenCast</h1>
+  <p>A simple podcast starter kit based on <a href="https://11ty.dev/">Eleventy</a>.</p>
+  {% for episode in pagination.items %}
+    <article id="e{{ episode.data.number }}">
+      <h2>
+        <a href="{{ episode.url }}">
+          {{ episode.data.title }}
+        </a>
+      </h2>
+      <audio
+        src="/episodes/{{ episode.data.number }}/audio.mp3"
+        preload="none" controls>
+      </audio>
+      <ul>
+        {% for chapter in episode.data.chapters %}
+          <li>
+            {{ chapter.time }}
+            {{ chapter.title }}
+          </li>
+        {% endfor %}
+      </ul>
+    </article>
+  {% endfor %}
+
+  {% include 'pages.njk' %}
+</main>
+
+{% include 'footer.njk' %}

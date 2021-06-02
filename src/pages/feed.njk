@@ -1,0 +1,71 @@
+---
+permalink: feed/index.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+
+  <title>{{ data.title }}</title>
+  <description>{{ data.description }}</description>
+  <copyright>{{ data.copyright }}</copyright>
+  <language>{{ data.language }}</language>
+  <link>{{ data.domain }}</link>
+
+  <atom:link href="{{ data.domain }}/feed/" rel="self" type="application/rss+xml"/>
+
+  <itunes:subtitle>{{ data.subtitle }}</itunes:subtitle>
+  <itunes:type>{{ data.type }}</itunes:type>
+  <itunes:author>{{ data.authors | join(', ') }}</itunes:author>
+  <itunes:explicit>{{ data.explicit }}</itunes:explicit>
+  <itunes:owner>
+    <itunes:name>{{ data.owner.name }}</itunes:name>
+    <itunes:email>{{ data.owner.email }}</itunes:email>
+  </itunes:owner>
+  <itunes:image href="{{ data.domain }}/images/cover.png"/>
+  <itunes:category text="{{ data.category }}">
+    <itunes:category text="{{ data.subcategory }}"/>
+  </itunes:category>
+
+{% for episode in collections.episode | reverse %}
+
+  {% set description %}
+    <ul>
+      {% for chapter in episode.data.chapters %}
+        <li>{{ chapter.time }} {{ chapter.title }}</li>
+      {% endfor %}
+    </ul>
+    <h2>Hosts</h2>
+    <ul>
+      {% for host in episode.data.hosts %}
+        <li>{{ host }}</li>
+      {% endfor %}
+    </ul>
+    {{ episode.templateContent | safe }}
+  {% endset %}
+
+  {% set fileUrl %}
+    {{ data.domain }}/episodes/{{ episode.data.number }}/audio.mp3
+  {% endset %}
+  {% set filePath %}
+    src/episodes/{{ episode.data.number }}/audio.mp3
+  {% endset %}
+
+  <item>
+    <title>{{ episode.data.title }}</title>
+    <pubDate>{{ episode.date.toUTCString() }}</pubDate>
+    <description><![CDATA[{{ description | htmlmin | safe }}]]></description>
+
+    <guid isPermaLink="true">{{ fileUrl | trim }}</guid>
+    <enclosure type="audio/mpeg" url="{{ fileUrl | trim }}" length="{{ filePath | trim | length }}"/>
+
+    <itunes:episode>{{ episode.data.number }}</itunes:episode>
+    <itunes:duration>{{ filePath | trim | duration }}</itunes:duration>
+    <itunes:author>{{ episode.data.hosts | join(', ') }}</itunes:author>
+    <itunes:explicit>{{ data.explicit }}</itunes:explicit>
+    <itunes:summary><![CDATA[{{ description | htmlmin | safe }}]]></itunes:summary>
+  </item>
+
+{% endfor %}
+
+</channel>
+</rss>

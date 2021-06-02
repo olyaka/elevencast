@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="{{ data.language }}">
+<head>
+  <meta charset="utf-8">
+  <title>
+    {{ title }}{% if page.url != '/' %} — {{ data.title }}{% endif %}
+  </title>
+
+  <meta name="description" content="{{ data.description }}">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ data.title }}">
+  <meta property="og:site_name" content="{{ data.description }}">
+  <meta property="og:url" content="{{ data.domain }}">
+  <meta property="og:image" content="{{ data.domain }}/images/social.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ data.title }}">
+  <meta name="twitter:description" content="{{ data.description }}">
+  <meta name="twitter:site" content="{{ data.domain }}">
+  <meta name="twitter:image" content="{{ data.domain }}/images/social.png">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="apple-touch-icon" href="/images/favicon/152.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/32.png">
+</head>
+<body>
+  {{ content | safe }}
+</body>
+</html>

@@ -1,3 +1,4 @@
+const CleanCSS = require("clean-css");
 const fs = require('fs');
 const htmlmin = require('html-minifier');
 const music = require('music-metadata');
@@ -69,6 +70,12 @@ module.exports = (config) => {
 
   config.addPassthroughCopy('src/images');
   config.addPassthroughCopy('src/episodes/**/*.mp3');
+
+  // Minified CSS
+
+  config.addFilter("cssmin", function(code) {
+    return new CleanCSS({}).minify(code).styles;
+  });
 
   // Config
 

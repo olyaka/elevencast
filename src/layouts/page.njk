@@ -25,6 +25,14 @@
   <link rel="apple-touch-icon" href="/images/favicon/152.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/32.png">
+  
+  {% set css %}
+    {% include "index.css" %}
+    {% include "../layouts/episode.css" %}
+  {% endset %}
+  <style>
+    {{ css | cssmin | safe }}
+  </style>
 </head>
 <body>
   {{ content | safe }}

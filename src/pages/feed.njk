@@ -60,6 +60,7 @@ permalink: feed.xml
 
     <itunes:episode>{{ episode.data.number }}</itunes:episode>
     <itunes:duration>{{ filePath | trim | duration }}</itunes:duration>
+    <itunes:image href="{{ data.domain }}/episodes/{{ episode.data.number }}/cover.png" />
     <itunes:author>{{ episode.data.hosts | join(', ') }}</itunes:author>
     <itunes:explicit>{{ data.explicit }}</itunes:explicit>
     <itunes:summary><![CDATA[{{ description | htmlmin | safe }}]]></itunes:summary>
